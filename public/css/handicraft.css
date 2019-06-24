@@ -1,0 +1,397 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body {
+  position:relative;
+}
+
+.handi-shadow {
+  position : absolute;
+  top:0;
+  left:0;
+  background-color:DarkSlateGrey;
+  z-index:100;
+  opacity: 0.8
+}
+
+.handi--header {
+  position:fixed;
+  height:30px;
+  margin-top:10px;
+  box-sizing:border-box;
+  border-bottom:1px solid black;
+  width:inherit;	
+}
+
+.handi--container {
+  position:relative;
+  margin:auto;
+}
+
+#handi--upload {
+  position:relative;
+  top : 45px;
+}
+
+
+.handi--container-basketContainer{
+  
+}
+
+.handi--container-basketbtns {
+text-align:left;
+padding:2px;
+color:white;
+
+font-size:12px;
+min-width:80px;
+cursor:pointer;
+
+}
+
+.handi--container-basketBuy {
+  color : white;
+  border:none;
+  background-color:green;
+  float:right;
+  width:auto;
+}
+
+.handi--container-basketCheck {
+  color:white;
+  text-align:left;
+  float:left;
+  width:auto;
+  cursor:pointer;
+  
+}
+
+.handi--container-basketPrice {
+ 
+}
+
+.handi--container-spaceContainer {
+  display:flex;
+  justify-content:center;
+  
+}
+
+.handi--container-spacebtns {
+  text-align:center;
+  padding:2px;
+  color:grey;
+  font-size:12px;
+  border-top:1px solid gray;  
+  width:100px;
+  cursor:pointer;
+}
+
+
+.handi--details-addContainer {
+ 
+  position:relative;
+  width:300px;
+  height:auto;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:45px;
+}
+
+
+.handi--details-inputs {
+  display:block;
+  margin-top:10px;
+  width : 300px;
+  height : 20px;
+  border:none;
+  background-color:transparent;
+  border-bottom : 1px solid white;
+  box-sizing:border-box;
+  padding:2px;
+  padding-left:0;
+  color:white;
+}
+#handi--details-priceInput {
+  width:100px;
+}
+
+#handi--details-descriptionInput {
+  width:240px;
+}
+
+#handi--details-nameInput {
+  width:300px;
+}
+
+.handi--details-submit {
+  display:block;
+  width:80px;
+  box-sizing:border-box;
+  height:22px;
+  background-color:transparent;
+  vertical-align:middle;  
+  padding:3px;
+  font-family:verdana;  
+  color:green;
+  background-color:black;
+  font-size:14px;
+  text-align:center;
+  margin-top:13px;
+  cursor:pointer;
+}
+
+.handi--container-thumbShadow {
+  position:absolute;
+  top : 0;
+  left : 0;
+  background-color:DarkSlateGrey;
+  opacity:0.6;
+  z-index:99;
+}
+
+.handi--container-thumbs {
+  position : relative;
+}
+
+.handi--container-progressbar {
+  position:absolute;
+  top : 50%;
+  left : 50%;
+  transform : translateX(-50%) translateY(-50%);
+  z-index:100;
+}
+
+.handi--header-backHome {
+  width : 25px;
+  height : 25px;
+  float : left ;
+  margin-bottom : 3px;
+}
+
+.handi--header-backHomeImg {
+  margin-top: 8px;;
+  margin-left : auto;
+  margin-right : auto;
+  width : 20px;
+  height : 20px;
+  cursor:pointer;
+}
+
+#handi--archive {
+  position:relative;
+  top : 45px;
+
+}
+#handi--model {
+  top:45px;
+position:relative;
+}
+
+.handi--archive-view {
+  margin-left:auto;
+  margin-right:auto; 
+  margin-bottom:50px;
+}
+.handi--archive-containerView{
+
+}
+.handi--archive-viewThumb{
+  float:left;
+ 
+}
+.handi--archive-viewDetails{
+  float : left;
+}
+
+.handi--archive-viewDetail {
+  padding:3px;
+  color : white;
+  min-height: 20px;
+  font-size : 16px;
+  background-color : DarkSlateGrey;
+}
+.handi--archive-viewDesc {
+  font-size:12px;
+  padding:3px;
+  color:white;
+  min-height:20px;
+  background-color:DarkSlateGrey;
+}
+
+
+.handi--header-create {
+  background-color:green;
+  border:1px solid white;
+  width : 120px;
+  font-size:12px;
+  color:white;
+  padding:3px;
+  height:25px;
+  margin-top:2px;
+  text-align:center;
+  cursor:pointer;
+  float:right;
+  box-sizing:border-box;
+}
+
+.handi--container-detailProduct {
+  color : black;
+  font-size : 14px;
+  padding:3px;
+  box-sizing:border-box;
+  
+}
+
+.handi--container-detailDesc {
+  color:gray;
+  font-size : 12px;
+  padding:3px;
+  box-sizing:border-box;
+}
+.handi--container-detailPrice{
+  color :DarkGreen;
+  font-size : 12px;
+  padding:3px;
+ box-sizing:border-box;
+}
+
+.handi--container-spaceCart {
+
+  cursor:pointer;
+  color:green;
+}
+.handi--header-item {
+  float:right;
+  padding:3px;
+  font-size:14px;
+  cursor:pointer;
+   
+  color:blue;
+  margin-left:8px;
+  width:20px;
+  height:20px;
+}
+
+.handi--header-png {
+  width:20px;
+  height:20px;
+  float:right;
+  padding:3px;
+  font-size:14px;
+  cursor:pointer;
+  margin-top:8px;  
+  color:blue;
+  margin-left:8px
+}
+
+.handi--container-hmContainer {
+  position:absolute;
+  top : 0;
+  right : 0;
+  min-height:20px;
+  z-index:101; 
+  background-color:white;
+}
+
+.handi--container-map {
+
+  position:absolute;
+  top : 0; 
+  right: 0;
+  z-index : 100;
+} 
+
+
+#handi--menu {
+  position:fixed;
+  z-index:105;
+}
+
+#handi--menu-footer{
+  position:fixed;
+  z-index:106;
+ background-color:black;
+ opacity:1;
+}
+
+.handi--footer-footerItem{
+  float:left;
+  width:80px;
+  font-size:10px;
+  text-align:center; 
+  padding:3px;
+  top:2px;
+  position:relative;
+ color:grey;
+  cursor:pointer;
+}
+
+
+#handi--footer-details {
+  position:relative;
+  font-size:12px;
+  padding:5px;  
+  margin-left:auto;
+  color:white;
+  margin-right:auto;
+} 
+
+.handi--footer-border {
+  width : 5px;
+  float:left;
+  height:20px;
+  border-left:1px solid white;
+  box-sizing:border-box;
+}
+
+#handi--footer-links {
+  height:30px;
+  display:flex;
+  justify-content:center; 
+  margin-left:auto;
+  margin-right:auto;
+}
+
+#handi--basket {
+  position:relative;
+  display  :flex;
+ justify-content:center; 
+
+}
+
+
+.handi--basket-btns {
+  width:auto;
+  height:auto;
+  padding:3px;
+  float:left;
+  position:relative;
+}
+
+.handi--basket-green {
+  border-bottom:2px solid green;
+}
+
+.handi--basket-red {
+  border-bottom:2px solid red;
+}
+
+
+.handi--upload-editRemove {
+  padding:3px;
+}
+
+.handi--hash-headerItem {
+  width:95px;
+  height:20px;
+  text-align:center;
+  padding:3px;
+  float:left;
+  box-sizing:border-box;
+ font-size:12px;
+ color:white;
+ cursor:pointer;
+}
