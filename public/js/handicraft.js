@@ -532,44 +532,135 @@ function _add_hash(){
    shadow.classList.add('handi-shadow');
    
    let inputContainer  = document.createElement('div');
-   inputContainer.classList.add('handi--details-addContainer');
+   inputContainer.classList.add('handi--details-addContainer');   
    
+   let preview = document.getElementById('handi--container-preview');
+   let style = window.getComputedStyle(preview);
+   let height =parseInt( style.getPropertyValue('height'));
+   let container = document.createElement('div');
+   container.style.width = '100%';
+   container.style.height  =( height -60)  + 'px';
+   container.style.padding= 5 + 'px';
+   container.style.paddingTop = 10 + 'px';
+   container.id = 'handi--hash-mainContainer'; 
+  
    let trends = document.createElement('div');
    trends.style.width  = 'auto';
-   trends.style.height = 400 + 'px';
+   trends.style.height =( height -30) + 'px';
    trends.style.border = '1px solid white';
    trends.style.marginTop = 10 + 'px';
-   
 
    let header = document.createElement('div');
    
    let usedHash = document.createElement('div');
-   let map = document.createElement('div');
+ 
    let trend = document.createElement('div');
 
-
-   usedHash.innerHTML  = 'used hash';
-   map.innerHTML = 'map';
+   usedHash.innerHTML  = '#';
+ 
    trend.innerHTML = 'trend';
 
+   let map = new Image();
+   map.src = View.getLink('/public/arrow/a.png');
+
+   let mapContainer = document.createElement('div');
+   mapContainer.classList.add('handi--hash-headerItem');
+
    usedHash.classList.add('handi--hash-headerItem');
-   map.classList.add('handi--hash-headerItem');
+   map.classList.add('handi--hash-mapItem');
    trend.classList.add('handi--hash-headerItem');
-  
+   trend.classList.add('handi--hash-trendItem'); 
+   usedHash.style.color = 'black';
+
+   header.classList.add('handi--hash-header');
+   mapContainer.appendChild(map);
    header.appendChild(usedHash);
-   header.appendChild(map);
+   header.appendChild(mapContainer);
    header.appendChild(trend);
 
    trends.appendChild(header);
-  
+   trends.appendChild(container);
    let input = document.createElement('input');
    input.type = 'text';
-   input.id = 'handi--details-' + map+ 'Input';
-   input.placeholder = '#';
+   input.id = 'handi--details-' +'hash'+ 'Input';
+//   input.placeholder = '#';
+  
    input.classList.add('handi--details-inputs');
-   inputContainer.appendChild(input);
+   input.classList.add('handi--details-placeholderLeft');
+   input.placeholder  = '#'
+    let inputWrapper = document.createElement('div');
+    inputWrapper.appendChild(input);
+    inputWrapper.style.position = 'relative';
+
+    inputContainer.appendChild(inputWrapper);
+
    input.addEventListener('click',function(e){
-      e.stopPropagation();
+       e.stopPropagation();
+
+      if(this.edit == true) return;
+      this.edit = true;
+      this.placeholder  = '';
+      let that  = this;
+ /*     $(this).animate({width : '-=23'},200,function(){
+       
+         })*/
+        })
+
+
+
+    let hash = document.createElement('div');
+        let add = new Image();
+        add.src  = View.getLink('/public/arrow/ad.png');
+        add.style.marginTop = 2 + 'px';
+        add.style.marginRight = -2 + 'px';
+        add.style.width = 22 + 'px';
+        add.style.height = 22 + 'px';
+        hash.appendChild(add);
+        hash.style.position = 'absolute';
+        hash.style.top = 5 + 'px';
+        hash.style.cursor = 'pointer';
+        hash.style.right = 0;
+        
+     
+       hash.addEventListener('click',function(evt){
+
+           let span = document.createElement('span');
+           span.classList.add('handi--hash-containerAdd');
+           container.appendChild(span);
+           span.innerHTML = input.value;
+           input.value = ''; 
+           evt.stopPropagation();
+
+       }) 
+      inputWrapper.appendChild(hash);
+
+
+
+
+   
+  inputContainer.addEventListener('click',function(e){e.stopPropagation()})
+
+  usedHash.addEventListener('click',function(e){        
+               View.hashMap.remove();
+               container.className = '';
+  })
+
+
+   mapContainer.addEventListener('click',function(e){
+           
+           container.innerHTML = '';
+           e.stopPropagation();
+       	   let map=L.map('handi--hash-mainContainer',{zoomControl : false}).setView([60.505, -0.09], 13);
+           View.hashMap = map;
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+              attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+              maxZoom: 18,
+              id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiMWlvMWwiLCJhIjoiY2psNThyd3luMGVsMjN4bnR3bXc4MXV2cyJ9.ks2qVsrV6d1rXu54-CyqIw'
+            }).addTo(map);        
+  new L.Control.Zoom({position:'bottomright'}).addTo(map);    
+
+
    })
 
    inputContainer.appendChild(trends);
@@ -579,7 +670,7 @@ function _add_hash(){
    hashes.style.width = 'auto';
    hashes.style.border = '1px solid white';
    hashes.style.marginTop = '10px';
-   inputContainer.appendChild(hashes); 
+//   inputContainer.appendChild(hashes); 
 
 
   shadow.appendChild(inputContainer);
@@ -881,25 +972,22 @@ function ex(el){
  let promise = function(time){
 
    setTimeout(function(){
-
       if(top == 0 && left == 0) {
-            let elem = document.getElementById('handi--container-preview').firstChild;
-           elem.style.float = 'left';
-          _create_show_details(el);
-           return;
+          let elem = document.getElementById('handi--container-preview').firstChild;
+          elem.style.float = 'left';
+         _create_show_details(el);
+          return;
       }          
         
       let image = new Image();
       image.onload = function(){
-
-         document.getElementById('handi--container-preview').innerHTML = '';        
+        document.getElementById('handi--container-preview').innerHTML = '';        
 
         let canvas = document.createElement('canvas');
         canvas.style.position = 'relative';       
       
         canvas.width = nWidth;
-        canvas.height = nHeight;
-        
+        canvas.height = nHeight;      
        
         if(yStep == 0){
           let df =( height - 300)/steps;
@@ -913,8 +1001,7 @@ function ex(el){
           nHeight -= df;
         }else {
             if(Math.max(nHeight,nWidth)> 300) {
-              let df = (width - 300)/steps;
-             
+              let df = (width - 300)/steps;             
 
               this.height = nHeight - df * (height/width);
               this.width = nWidth -df ;
@@ -1182,12 +1269,8 @@ function _create_show_details(el){
          this.state = 'active';
          _create_map();
         break;
-    }
-   
-   
-  
-});
-         
+    } 
+});         
 
  hmContainer.classList.add('handi--container-hmContainer');
  hmContainer.id = 'handi--container-hmContainer' 
@@ -1197,12 +1280,9 @@ function _create_show_details(el){
  container.id = 'handi--container-details';
  container.appendChild(hmContainer);
 
-
  container.appendChild(product);
  container.appendChild(description);
- container.appendChild(price);  
- 
- 
+ container.appendChild(price);
 
  document.getElementById('handi--container-preview').appendChild(container);
 }
@@ -1212,12 +1292,166 @@ function _clear_map(){
 }
 
 function _select_location(){
+ let shadow = document.createElement('div');
+   shadow.style.width = window.innerWidth + 'px';
+   shadow.style.height = window.innerHeight + 'px';
+
+   shadow.classList.add('handi-shadow');
+   
+   let inputContainer  = document.createElement('div');
+   inputContainer.classList.add('handi--details-addContainer');   
+   
+   let preview = document.getElementById('handi--container-preview');
+   let style = window.getComputedStyle(preview);
+   let height =parseInt( style.getPropertyValue('height'));
+   let container = document.createElement('div');
+   container.style.width = '100%';
+   container.style.height  =( height -60)  + 'px';
+   container.style.padding= 5 + 'px';
+   container.style.paddingTop = 10 + 'px';
+   container.id = 'handi--hash-mainContainer'; 
+  
+   let trends = document.createElement('div');
+   trends.style.width  = 'auto';
+   trends.style.height =( height -30) + 'px';
+   trends.style.border = '1px solid white';
+   trends.style.marginTop = 10 + 'px';
+
+   let header = document.createElement('div');
+   
+   let usedHash = document.createElement('div');
+ 
+   let trend = document.createElement('div');
+
+   usedHash.innerHTML  = '#';
+ 
+   trend.innerHTML = 'trend';
+
+   let map = new Image();
+   map.src = View.getLink('/public/arrow/a.png');
+
+   let mapContainer = document.createElement('div');
+   mapContainer.classList.add('handi--hash-headerItem');
+
+   usedHash.classList.add('handi--hash-headerItem');
+   map.classList.add('handi--hash-mapItem');
+   trend.classList.add('handi--hash-headerItem');
+   trend.classList.add('handi--hash-trendItem'); 
+   usedHash.style.color = 'black';
+
+   header.classList.add('handi--hash-header');
+   mapContainer.appendChild(map);
+   header.appendChild(usedHash);
+   header.appendChild(mapContainer);
+   header.appendChild(trend);
+
+   trends.appendChild(header);
+   trends.appendChild(container);
+   let input = document.createElement('input');
+   input.type = 'text';
+   input.id = 'handi--details-' +'hash'+ 'Input';
+//   input.placeholder = '#';
+  
+   input.classList.add('handi--details-inputs');
+   input.classList.add('handi--details-placeholderLeft');
+   input.placeholder  = '#'
+    let inputWrapper = document.createElement('div');
+    inputWrapper.appendChild(input);
+    inputWrapper.style.position = 'relative';
+
+    inputContainer.appendChild(inputWrapper);
+
+   input.addEventListener('click',function(e){
+       e.stopPropagation();
+
+      if(this.edit == true) return;
+      this.edit = true;
+      this.placeholder  = '';
+      let that  = this;
+ /*     $(this).animate({width : '-=23'},200,function(){
+       
+         })*/
+        })
+
+
+
+    let hash = document.createElement('div');
+        let add = new Image();
+        add.src  = View.getLink('/public/arrow/ad.png');
+        add.style.marginTop = 2 + 'px';
+        add.style.marginRight = -2 + 'px';
+        add.style.width = 22 + 'px';
+        add.style.height = 22 + 'px';
+        hash.appendChild(add);
+        hash.style.position = 'absolute';
+        hash.style.top = 5 + 'px';
+        hash.style.cursor = 'pointer';
+        hash.style.right = 0;
+        
+     
+       hash.addEventListener('click',function(evt){
+
+           let span = document.createElement('span');
+           span.classList.add('handi--hash-containerAdd');
+           container.appendChild(span);
+           span.innerHTML = input.value;
+           input.value = ''; 
+           evt.stopPropagation();
+
+       }) 
+      inputWrapper.appendChild(hash);
+
+
+
+
+   
+  inputContainer.addEventListener('click',function(e){e.stopPropagation()})
+
+  usedHash.addEventListener('click',function(e){        
+               View.hashMap.remove();
+               container.className = '';
+  })
+
+
+   mapContainer.addEventListener('click',function(e){
+           
+           container.innerHTML = '';
+           e.stopPropagation();
+       	   let map=L.map('handi--hash-mainContainer',{zoomControl : false}).setView([60.505, -0.09], 13);
+           View.hashMap = map;
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+              attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+              maxZoom: 18,
+              id: 'mapbox.streets',
+                accessToken: 'pk.eyJ1IjoiMWlvMWwiLCJhIjoiY2psNThyd3luMGVsMjN4bnR3bXc4MXV2cyJ9.ks2qVsrV6d1rXu54-CyqIw'
+            }).addTo(map);        
+  new L.Control.Zoom({position:'bottomright'}).addTo(map);    
+
+
+   })
+
+   inputContainer.appendChild(trends);
+
+   let hashes = document.createElement('div');
+   hashes.style.height = 150 + 'px';
+   hashes.style.width = 'auto';
+   hashes.style.border = '1px solid white';
+   hashes.style.marginTop = '10px';
+//   inputContainer.appendChild(hashes); 
+
+
+  shadow.appendChild(inputContainer);
+   shadow.addEventListener('click',_close_shadow);
+   document.body.appendChild(shadow);
+
+          /*
             //document.getElementById('handi--container-hmContainer').style.backgroundColor = 'white';
           
            if(document.getElementById('handi--container-map')){
                document.getElementById('handi--container-map').remove();
                return;
            }
+
            let mapContainer = document.createElement('div');
            mapContainer.id = 'handi--container-map'; 
            mapContainer.classList.add('handi--container-map');
@@ -1240,9 +1474,8 @@ function _select_location(){
               maxZoom: 18,
               id: 'mapbox.streets',
                 accessToken: 'pk.eyJ1IjoiMWlvMWwiLCJhIjoiY2psNThyd3luMGVsMjN4bnR3bXc4MXV2cyJ9.ks2qVsrV6d1rXu54-CyqIw'
-            }).addTo(map);   
-             
-
+            }).addTo(map);            
+*/
 
 }
 
