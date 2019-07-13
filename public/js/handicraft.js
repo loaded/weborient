@@ -947,6 +947,9 @@ function ex(el){
   
   let width = el.width;
   let height = el.height;
+  let top = el.top;
+
+  
   let src = el.src;
   if(View.isMobile()){
     left = parseInt((View.config.mainWidth - width)/2) ;   
@@ -954,16 +957,17 @@ function ex(el){
    left = parseInt((View.config.desktop - width)/2) ;
    
   let style = window.getComputedStyle(el) ;
-  let top =parseInt( style.getPropertyValue('margin-top'));
- 
+  //let top = style.getPropertyValue('margin-top')
+  
   let type = width > height ? 'width' : 'height';
   let steps = (type == 'width') ? parseInt( top/10) : parseInt( left/10);
   
   let xStep = parseInt(left/steps);
   let yStep = parseInt(top/steps);
-
   
-
+ 
+    
+ 
   let max = Math.max(width,height);
 
   let nWidth = parseInt(width);
@@ -1721,6 +1725,7 @@ function _load_template_for_show(e){
    canvas.style.marginLeft = marginLeft + 'px';
 
    canvas.style.marginTop = marginTop + 'px';
+   canvas.top = marginTop;
    canvas.addEventListener('click',_slide_canvas);
    preview.style.margin = 'auto';  
    
