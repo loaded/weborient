@@ -1,6 +1,0 @@
-
-function handicraft(){
-  
-}
-
-module.exports.router = handicraft
